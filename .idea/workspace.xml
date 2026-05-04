@@ -5,11 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9584d57f-f5b0-4bcf-9319-d9b1f2716605" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PROJEKT/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/PROJEKT/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PROJEKT/instance/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/PROJEKT/instance/database.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PROJEKT/templates/grades.html" beforeDir="false" afterPath="$PROJECT_DIR$/PROJEKT/templates/grades.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PROJEKT/templates/teacher_test_results.html" beforeDir="false" afterPath="$PROJECT_DIR$/PROJEKT/templates/teacher_test_results.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PROJEKT/doFrontendowcow.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WAŻNE INFO.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Zmiany.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,12 +31,12 @@
     &quot;assignee&quot;: &quot;lokrok25&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/Wasill17/Test_Piotral.git&quot;,
-    &quot;accountId&quot;: &quot;773428d8-22fa-4d29-97ca-74ad324edaf7&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/lokrok25/TestPiotral.git",
+    "accountId": "773428d8-22fa-4d29-97ca-74ad324edaf7"
   }
-}</component>
+}]]></component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -50,20 +48,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;Python.app.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Github repositories/Test_Piotral&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.editor&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "Python.app.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "D:/Github repositories/TestPiotral",
+    "settings.editor.selected.configurable": "preferences.editor"
   }
-}</component>
+}]]></component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-d7ad00fb9fc3-c546a90a8094-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-242.23726.102" />
+        <option value="bundled-python-sdk-0e3be3396995-c546a90a8094-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-242.23339.19" />
       </set>
     </attachedChunks>
   </component>

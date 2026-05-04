@@ -1,4 +1,0 @@
-W trakcie ogarniania flaska uznałem, że najlepiej i najłatwiej będzie to robić w jednym folderze, 
-bo inaczej będzie problem z odpalaniem tej strony, bo do tego potrzeba i pliku .py i plików html, css itd., 
-więc frontendowcy niech pracują na folderach static -> pliki css, templates -> pliki html i ewentualnie nowych folderach, 
-a backendowcy niech pracują na plikach .py 
