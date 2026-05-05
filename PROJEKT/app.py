@@ -9,7 +9,7 @@ app.secret_key = 'tajny-klucz-zadymeczka'
 
 # Baza danych
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db' #ścieżka do bazy
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False #wyłącza śledzenie zmian (nie muli aż tak bo oszczedza zasoby)
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False #wyłącza śledzenie zmian
 db.init_app(app)
 
 
@@ -82,24 +82,24 @@ def student():
         subject_count = Subject.query.count()
         subjects = Subject.query.all()
 
-        # Pobierz ID grup studenta
+        #Pobierz ID grup studenta
         group_ids = [g.id for g in student_user.groups]
 
-        # Testy przypisane do grup
+        #Testy przypisane do grup
         allowed_tests = Test.query \
             .join(test_groups) \
             .filter(test_groups.c.group_id.in_(group_ids)) \
             .all()
 
-        # ID testów, które już podjął
+        #ID testów, które już podjął
         taken_test_ids = set(g.attempt_id for g in grades if g.attempt_id is not None)
 
-        # Filtrowanie tylko tych dostępnych z przypisanych
+        #Filtrowanie tylko tych dostępnych z przypisanych
         available_tests = [t for t in allowed_tests if t.id not in taken_test_ids]
         test_count = len(available_tests)
 
 
-        # Last attempts data
+        #Last attempts data
         attempts = StudentAttempt.query.filter_by(student_id=user_id).order_by(StudentAttempt.id.desc()).limit(5).all()
         last_attempts = [
             {
@@ -202,7 +202,7 @@ def student_test(test_id):
             db.session.add(new_attempt)
             db.session.commit()
 
-                        # Zapisz odpowiedzi ucznia do AttemptAnswer
+                        #Zapisz odpowiedzi ucznia do AttemptAnswer
             for qid_str, selected_option_id in answers.items():
                 new_answer = AttemptAnswer(
                     attempt_id=new_attempt.id,
@@ -212,7 +212,7 @@ def student_test(test_id):
             db.session.commit()
 
 
-            # Assign grade based on score
+
             percentage = (score / total) * 100 if total > 0 else 0
             if percentage >= 90:
                 grade_value = 5
@@ -313,7 +313,7 @@ def grades():
     teacher_id = session['user_id']
 
     if request.method == 'POST':
-        # ——— Twoja logika dodawania oceny, ale nie musisz tu odświeżać grades ———
+
         try:
             grade_content = int(request.form['grade'])
             if grade_content < 2 or grade_content > 5:
@@ -324,7 +324,7 @@ def grades():
                 user_id=session['user_id'],
                 subject_id=int(request.form['subject_id']),
                 added_date=datetime.utcnow(),
-                attempt_id=int(request.form['attempt_id'])  # jeśli używasz attempt_id
+                attempt_id=int(request.form['attempt_id'])  #jeśli używasz attempt_id
             )
             db.session.add(new_grade)
             db.session.commit()
@@ -334,7 +334,7 @@ def grades():
         except Exception as e:
             return f"Wystąpił błąd: {e}"
 
-    # ——— GET — pobierz oceny z testów tego nauczyciela ———
+    #GET — pobierz oceny z testów tego nauczyciela
     grades = Grade.query \
         .join(StudentAttempt, Grade.attempt_id == StudentAttempt.id) \
         .join(Test, StudentAttempt.test_id == Test.id) \
@@ -401,10 +401,10 @@ def delete_group(group_id):
 
     group = Group.query.filter_by(id=group_id, teacher_id=session['user_id']).first()
     if group:
-        # Usuń powiązania z uczniami
+        #Usuń powiązania z uczniami
         group.students.clear()
 
-        # Usuń powiązania z testami (test_groups)
+        #Usuń powiązania z testami (test_groups)
         group.tests.clear()
 
         db.session.delete(group)
@@ -489,26 +489,26 @@ def delete_test(test_id):
 
     test = Test.query.get_or_404(test_id)
 
-    # 1️⃣ Odepnij test od grup
+    #Odepnij test od grup
     test.groups.clear()
 
-    # 2️⃣ Usuń powiązane pytania
+    #Usuń powiązane pytania
     for tq in list(test.test_questions):
         db.session.delete(tq)
 
-    # 3️⃣ Usuń próby uczniów i ich odpowiedzi + oceny
+    #Usuń próby uczniów i ich odpowiedzi + oceny
     for attempt in list(test.attempts):
-        # a) odpowiedzi
+        #odpowiedzi
         for ans in list(attempt.answers):
             db.session.delete(ans)
-        # b) oceny
+        #oceny
         grades = Grade.query.filter_by(attempt_id=attempt.id).all()
         for g in grades:
             db.session.delete(g)
-        # c) sama próba
+        #sama próba
         db.session.delete(attempt)
 
-    # 4️⃣ Wreszcie usuń sam test
+
     db.session.delete(test)
     db.session.commit()
 
@@ -525,7 +525,7 @@ def add_question_to_test(test_id):
     if request.method == 'POST':
         form = request.form
 
-        # 🔹 Dodanie istniejącego pytania po ID
+        #Dodanie istniejącego pytania po ID
         if 'question_id' in form and 'points' in form and 'question_text' not in form:
             try:
                 question_id = int(form['question_id'])
@@ -542,7 +542,7 @@ def add_question_to_test(test_id):
             except ValueError:
                 return "Błąd danych wejściowych.", 400
 
-        # 🔹 Dodanie nowego pytania i jego odpowiedzi
+        #Dodanie nowego pytania i jego odpowiedzi
         if 'question_text' in form:
             text = form['question_text']
             points = int(form['points'])
@@ -585,7 +585,7 @@ def edit_question(question_id):
         question.text = request.form['question_text']
         db.session.commit()
 
-        # Aktualizacja odpowiedzi
+        #Aktualizacja odpowiedzi
         for option in question.answer_options:
             option.text = request.form.get(f'option_{option.id}')
             option.is_correct = f'is_correct_{option.id}' in request.form
@@ -642,23 +642,23 @@ def student_subjects():
 
     user = UserInfo.query.get(session['user_id'])
 
-    # 1) Pobierz testy przypisane do grup
+    #Pobierz testy przypisane do grup
     group_ids = [g.id for g in user.groups]
     tests = Test.query \
         .join(test_groups) \
         .filter(test_groups.c.group_id.in_(group_ids)) \
         .all()
 
-    # 2) Zbiór unikalnych przedmiotów
+    #Zbiór unikalnych przedmiotów
     subjects = Subject.query.order_by(Subject.subject_name).all()
 
-    # 3) Pobierz wszystkie oceny ucznia, posortowane malejąco wg daty
+    #Pobierz wszystkie oceny ucznia, posortowane malejąco wg daty
     grades = Grade.query \
         .filter_by(user_id=user.id) \
         .order_by(Grade.added_date.desc()) \
         .all()
     #grades = Grade.query.join(StudentAttempt).join(Test).filter(Test.teacher_id == session['user_id']).all()
-    # 4) Pogru­puj oceny po przedmiocie
+    
     grades_by_subject = defaultdict(list)
     for g in grades:
         grades_by_subject[g.subject_id].append(g)
